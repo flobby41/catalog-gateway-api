@@ -1,108 +1,108 @@
 # ECommerce API
 
-API web ASP.NET Core pour la gestion de produits et catégories d'un e-commerce.
+ASP.NET Core web API for managing products and categories in an e-commerce application.
 
-## Prérequis
+## Prerequisites
 
-- .NET 7.0 SDK (ou supérieur)
-- Visual Studio 2022, VS Code, ou un autre éditeur compatible
+- .NET 7.0 SDK (or higher)
+- Visual Studio 2022, VS Code, or any compatible editor
 
-## Configuration
+## Setup
 
-1. Clonez le repository
-2. Ouvrez le projet dans Visual Studio ou VS Code
-3. Restaurez les packages NuGet :
+1. Clone the repository
+2. Open the project in Visual Studio or VS Code
+3. Restore NuGet packages:
    ```bash
    dotnet restore ECommerceAPI.csproj
    ```
 
-## Base de données
+## Database
 
-L'API utilise Entity Framework Core avec **SQLite** pour le développement. La base de données sera créée automatiquement au premier démarrage dans le fichier `ECommerceDB.db`.
+The API uses Entity Framework Core with **SQLite** for development. The database will be created automatically on first startup in the `ECommerceDB.db` file.
 
 ### Connection String
 
-La connection string par défaut utilise SQLite :
+The default connection string uses SQLite:
 ```
 Data Source=ECommerceDB.db
 ```
 
-> **Note** : Pour utiliser SQL Server en production, modifiez le package NuGet et la connection string dans `appsettings.json`.
+> **Note**: To use SQL Server in production, modify the NuGet package and connection string in `appsettings.json`.
 
-## Démarrage
+## Getting Started
 
 ```bash
 dotnet run --project ECommerceAPI.csproj
 ```
 
-L'API sera disponible sur `http://localhost:5000` (ou le port configuré).
+The API will be available at `http://localhost:5000` (or the configured port).
 
-## Tester l'API
+## Testing the API
 
-### Option 1 : Swagger UI (Recommandé)
+### Option 1: Swagger UI (Recommended)
 
-**Swagger est déjà installé et configuré !** Pas besoin d'installation supplémentaire.
+**Swagger is already installed and configured!** No additional installation needed.
 
-1. Démarrez l'application :
+1. Start the application:
    ```bash
    dotnet run --project ECommerceAPI.csproj
    ```
 
-2. Ouvrez votre navigateur et accédez à :
+2. Open your browser and navigate to:
    ```
    http://localhost:5000/swagger
    ```
 
-3. Vous verrez une interface interactive avec tous les endpoints disponibles. Vous pouvez :
-   - Voir tous les endpoints (GET, POST, DELETE)
-   - Tester chaque endpoint directement depuis le navigateur
-   - Voir les modèles de données (DTOs)
-   - Exécuter des requêtes et voir les réponses
+3. You will see an interactive interface with all available endpoints. You can:
+   - View all endpoints (GET, POST, DELETE)
+   - Test each endpoint directly from the browser
+   - View data models (DTOs)
+   - Execute requests and see responses
 
-### Option 2 : cURL ou Postman
+### Option 2: cURL or Postman
 
-Vous pouvez également tester l'API avec :
-- **cURL** (ligne de commande)
-- **Postman** (application desktop)
-- **Thunder Client** (extension VS Code)
-- Votre application frontend (React/Angular)
+You can also test the API with:
+- **cURL** (command line)
+- **Postman** (desktop application)
+- **Thunder Client** (VS Code extension)
+- Your frontend application (React/Angular)
 
-### Exemples avec cURL
+### cURL Examples
 
 ```bash
-# Récupérer tous les produits
+# Get all products
 curl http://localhost:5000/api/products
 
-# Récupérer un produit par ID
+# Get a product by ID
 curl http://localhost:5000/api/products/1
 
-# Créer un produit
+# Create a product
 curl -X POST http://localhost:5000/api/products \
   -H "Content-Type: application/json" \
-  -d '{"name": "Nouveau Produit", "description": "Description", "price": 199, "image": "/images/test.png", "categories": [1]}'
+  -d '{"name": "New Product", "description": "Description", "price": 199, "image": "/images/test.png", "categories": [1]}'
 ```
 
 ## Endpoints
 
-### Produits
+### Products
 
-- `GET /api/products` - Récupère tous les produits
-- `GET /api/products/{id}` - Récupère un produit par ID
-- `GET /api/products?slug={slug}` - Récupère un produit par slug
-- `POST /api/products` - Crée un nouveau produit
-- `DELETE /api/products/{id}` - Supprime un produit
+- `GET /api/products` - Get all products
+- `GET /api/products/{id}` - Get a product by ID
+- `GET /api/products?slug={slug}` - Get a product by slug
+- `POST /api/products` - Create a new product
+- `DELETE /api/products/{id}` - Delete a product
 
-### Catégories
+### Categories
 
-- `GET /api/categories` - Récupère toutes les catégories avec leurs produits
-- `GET /api/categories/{id}` - Récupère une catégorie par ID
-- `GET /api/categories?slug={slug}` - Récupère une catégorie par slug
-- `POST /api/categories` - Crée une nouvelle catégorie
-- `DELETE /api/categories/{id}` - Supprime une catégorie
+- `GET /api/categories` - Get all categories with their products
+- `GET /api/categories/{id}` - Get a category by ID
+- `GET /api/categories?slug={slug}` - Get a category by slug
+- `POST /api/categories` - Create a new category
+- `DELETE /api/categories/{id}` - Delete a category
 
-## Exemples d'utilisation
+## Usage Examples
 
-### Créer un produit
+### Create a Product
 
 ```json
 POST /api/products
@@ -115,7 +115,7 @@ POST /api/products
 }
 ```
 
-### Créer une catégorie
+### Create a Category
 
 ```json
 POST /api/categories
@@ -125,24 +125,23 @@ POST /api/categories
 }
 ```
 
-## Fonctionnalités
+## Features
 
-- Génération automatique de URL-slug
-- Relations many-to-many entre produits et catégories
-- Validation des données
-- Gestion des erreurs HTTP appropriées
-- Données de test incluses
+- Automatic URL-slug generation
+- Many-to-many relationships between products and categories
+- Data validation
+- Appropriate HTTP error handling
+- Test data included
 
-## Structure du projet
+## Project Structure
 
 ```
 ECommerceAPI/
-├── Controllers/          # Contrôleurs API
-├── Data/                # Contexte Entity Framework
+├── Controllers/          # API Controllers
+├── Data/                # Entity Framework Context
 ├── DTOs/                # Data Transfer Objects
-├── Models/              # Modèles de données
-├── Services/            # Services utilitaires
-├── Program.cs           # Point d'entrée de l'application
+├── Models/              # Data Models
+├── Services/            # Utility Services
+├── Program.cs           # Application Entry Point
 └── appsettings.json     # Configuration
 ```
-
